@@ -25,6 +25,7 @@ from adapt.intent import Intent, IntentBuilder
 from os import listdir
 from os.path import join, abspath, dirname, splitext, basename, exists
 
+from mycroft.api import DeviceApi
 from mycroft.client.enclosure.api import EnclosureAPI
 from mycroft.configuration import Configuration
 from mycroft.dialog import DialogLoader
@@ -323,6 +324,9 @@ class MycroftSkill(object):
             Returns:    True if an utterance was handled, otherwise False
         """
         return False
+
+    def send_email(self, title, body):
+        DeviceApi().send_email(title, body, basename(self.vocab_dir))
 
     def make_active(self):
         """
